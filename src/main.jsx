@@ -20,6 +20,7 @@ const router = createBrowserRouter([
     path: "/",
     element: <Root />,
     errorElement: <ErrorPage />,
+    // ErrorBoundary: ErrorPage, // I think old version like this
     loader: rootLoader,
     action: rootAction,
     children: [
@@ -30,8 +31,10 @@ const router = createBrowserRouter([
           {
             path: "contacts/:contactId",
             element: <Contact />,
+            // component: Contact, // old version but its still working
             loader: contactLoader,
             action: contactAction,
+            // caseSensitive: true,
           },
           {
             path: "contacts/:contactId/edit",
@@ -52,6 +55,6 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <RouterProvider router={router} fallbackElement={<div>Loading...</div>} />
   </React.StrictMode>,
 );
